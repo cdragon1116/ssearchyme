@@ -42,7 +42,7 @@ def raku_search(keyword)
   results = []
   next_page = true
   while next_page
-    p page_num
+    page_num
     result = r_get_data(keyword + '?p=' + page_num.to_s)
     results += result
     if result.size == 0 or results.size > 30

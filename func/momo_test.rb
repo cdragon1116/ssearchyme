@@ -51,9 +51,9 @@ def m_get_data(keyword)
   return item_list
 end
 
-# def momo_search(keyword)
-#   pages = m_get_allpage(keyword)
-# end
+def momo_search(keyword)
+  pages = m_get_allpage(keyword)
+end
 
 
 # m_get_data('ypl')

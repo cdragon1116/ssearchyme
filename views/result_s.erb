@@ -89,26 +89,26 @@
     </div>
 
 
-    <% @ary.sort_by!{|k , v| v['now_price']}.each.with_index do |elem, i|%>
+    <% @ary.sort_by{ |x| x['now_price'] }.each.with_index do |x, i |%>
     <div class="row">
-        <a href="<%= elem[1]['url'] %>" target="_blank">
+        <a href="<%= x['url'] %>" target="_blank">
         <div class="box index">
             <%= i + 1 %>
         </div>
         <div class="box shop">
-            <%= elem[1]['from_shop']%>
+            <%= x['from_shop']%>
         </div>
         <div class="box name">
-            <%= elem[1]['item_name']%>
+            <%= x['item_name']%>
         </div>
         <div class="box price">
-            <%= elem[1]['now_price'] %>
+            <%= x['now_price'] %>
         </div>
         <div class="box price">
-            <%= elem[1]['ori_price'] %>
+            <%= x['ori_price'] %>
         </div><div class="box price">
-            <%= if elem[1]['ori_price'] != nil
-                    "#{(elem[1]['now_price'].to_f / elem[1]['ori_price']).round(2)}"
+            <%= if x['ori_price'] != nil
+                    "#{(x['now_price'].to_f / x['ori_price']).round(2)}"
                 end %> 
         </div>
         </a>
