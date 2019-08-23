@@ -17,9 +17,9 @@ def r_get_data(keyword)
     item_name = x.css('a.ga').text
     now_price = x.css('span.rec-price-20').text.sub(',','').sub('$','').to_i
     url = 'https://www.findprice.com.tw/' + x.css('a').attr('href').text
-
+    from_shop = x.css('span img').attr('title').text
     item_list.push( 
-       {'from_shop'=>'樂天市場',
+       {'from_shop'=> from_shop,
         'item_name'=> item_name, 
         'now_price'=> now_price, 
         'ori_price'=> nil, 
@@ -37,7 +37,7 @@ def raku_search(keyword)
   while next_page
     result = r_get_data(keyword + '/?i=' + page_num.to_s)
     results += result
-    if result.size == 0 or results.size > 50
+    if result.size == 0 or results.size > 150
         next_page = false
         return results
     else
@@ -47,6 +47,6 @@ def raku_search(keyword)
   return results
 end
 
-# keyword = 'ypl'
-# result = raku_search(keyword)
-# puts JSON.pretty_generate(result)
+keyword = 'ypl'
+result = raku_search(keyword)
+puts JSON.pretty_generate(result)

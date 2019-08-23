@@ -19,7 +19,7 @@ def all_get_data(keyword)
     url = 'https://www.findprice.com.tw/' + x.css('a').attr('href').text
 
     item_list.push( 
-       {'from_shop'=>'樂天市場',
+       {'from_shop'=>'all',
         'item_name'=> item_name, 
         'now_price'=> now_price, 
         'ori_price'=> nil, 
@@ -47,6 +47,6 @@ def all_search(keyword)
   return results
 end
 
-# keyword = 'ypl'
-# result = raku_search(keyword)
-# puts JSON.pretty_generate(result)
+keyword = 'ypl'
+result = all_search(keyword)
+puts JSON.pretty_generate(result)
