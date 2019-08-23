@@ -91,7 +91,7 @@
         </div>
 
 
-        <% @ary.sort_by!{|k , v| v['now_price']}.each.with_index do |elem, i|%>
+        <% @ary.each.with_index do |elem, i|%>
         <div class="row">
             <a href="<%= elem[1]['url'] %>" target="_blank">
             <div class="box index">

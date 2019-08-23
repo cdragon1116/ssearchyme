@@ -26,6 +26,7 @@ class App < Sinatra::Base
       @shop = shop_search(@keyword).to_a if params.has_key?("shop_s")
       @ary = Array(@yahoo) + Array(@momo) + Array(@raku) + Array(@shop)
     end
+    @ary.sort_by!{|k , v| v['now_price']}
     erb:result
 
   end
