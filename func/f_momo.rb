@@ -36,7 +36,7 @@ def momo_search(keyword)
     result = m_get_data(keyword + '/?i=' + page_num.to_s + '&m=14')
     before_size = results.size
     results.merge!(result)
-    if results.size == before_size or results.size > 50
+    if results.size == before_size or results.size > 80
       next_page = false
       return results
     else

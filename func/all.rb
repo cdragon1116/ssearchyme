@@ -37,7 +37,7 @@ def all_search(keyword)
     result = all_get_data(keyword + '/?i=' + page_num.to_s + '&m=28847204%2C57%2C54%2C73%2C14%2C6%2C3%2C43455509%2C38%2C53%2C3799802')
     before_size = results.size
     results = results.merge(result)
-    if results.size == before_size or results.size > 150
+    if results.size == before_size or results.size > 120
       next_page = false
       return results
     else

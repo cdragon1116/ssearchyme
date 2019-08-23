@@ -43,7 +43,7 @@ def y_get_allpage(keyword)
     result = y_get_data(keyword + '&pg=' + page_num.to_s)
     before_size = results.size
     results.merge!(result)
-    if results.size == before_size or result.size == 0 or results.size > 50
+    if results.size == before_size or result.size == 0 or results.size > 80
         next_page = false
         return results
     else

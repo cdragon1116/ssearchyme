@@ -1,6 +1,9 @@
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <style type="text/css">
+    <meta charset="UTF-8">
+    <title>Document</title>
+        <style type="text/css">
         body{
             background-color: #444;
         }
@@ -60,61 +63,73 @@
         }
     </style>
 </head>
+
 <body>
-
-
-<div class="wrap">
+    <div class="wrap">
     <%= Time.now%>
     <h1>Result</h1>
     <p class="size">共 <%= @ary.size%> 筆資料</p>
-    <div class="row head">
-        <div class="box index">
-            
+    <div class="table" id="tblSort">
+        <div class="row head">
+                <div class="box index">
+                </div>
+                <div class="box shop">
+                    來源
+                </div>
+                <div class="box name">
+                    商品名稱
+                </div>
+                <div class="box price">
+                    售價
+                </div>
+                <div class="box price">
+                    原價
+                </div>
+                <div class="box price">
+                    折數
+                </div>
         </div>
-        <div class="box shop">
-            來源
+
+
+        <% @ary.sort_by!{|k , v| v['now_price']}.each.with_index do |elem, i|%>
+        <div class="row">
+            <a href="<%= elem[1]['url'] %>" target="_blank">
+            <div class="box index">
+                <%= i + 1 %>
+            </div>
+            <div class="box shop">
+                <%= elem[1]['from_shop']%>
+            </div>
+            <div class="box name">
+                <%= elem[1]['item_name']%>
+            </div>
+            <div class="box price">
+                <%= elem[1]['now_price'] %>
+            </div>
+            <div class="box price">
+                <%= elem[1]['ori_price'] %>
+            </div><div class="box price">
+                <%= if elem[1]['ori_price'] != nil
+                        "#{(elem[1]['now_price'].to_f / elem[1]['ori_price']).round(2)}"
+                    end %> 
+            </div>
+            </a>
         </div>
-        <div class="box name">
-            商品名稱
-        </div>
-        <div class="box price">
-            售價
-        </div>
-        <div class="box price">
-            原價
-        </div>
-        <div class="box price">
-            折數
-        </div>
+        <% end %>
     </div>
 
 
-    <% @ary.sort_by!{|k , v| v['now_price']}.each.with_index do |elem, i|%>
-    <div class="row">
-        <a href="<%= elem[1]['url'] %>" target="_blank">
-        <div class="box index">
-            <%= i + 1 %>
-        </div>
-        <div class="box shop">
-            <%= elem[1]['from_shop']%>
-        </div>
-        <div class="box name">
-            <%= elem[1]['item_name']%>
-        </div>
-        <div class="box price">
-            <%= elem[1]['now_price'] %>
-        </div>
-        <div class="box price">
-            <%= elem[1]['ori_price'] %>
-        </div><div class="box price">
-            <%= if elem[1]['ori_price'] != nil
-                    "#{(elem[1]['now_price'].to_f / elem[1]['ori_price']).round(2)}"
-                end %> 
-        </div>
-        </a>
-    </div>
-    <% end %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script> 
+    <script type="text/javascript">
+        console.log("loaded")
+
+
+    </script>
 
 </div>
-
 </body>
+</html>
+
+
+
+
