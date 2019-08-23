@@ -1,0 +1,120 @@
+
+<head>
+    <style type="text/css">
+        body{
+            background-color: #444;
+        }
+        *{  
+            font-family: Verdana;
+            margin: 0;
+            padding: 0;
+            list-style:none;
+        }
+        .wrap{
+            width: 1300px;
+            margin: 30px auto;
+            color: #ccc;
+            padding: 20px;
+            border: 1px solid #eee;
+        }
+        .wrap .size{
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .row {
+            display: flex;
+            line-height: 30px;
+            padding: 5px;
+        }
+        .row a{
+            width: 100%;
+            line-height: 30px;
+            display: flex;
+            padding: 5px;
+            text-decoration: none;
+            color: #eee;
+            border-radius: 5px;
+            transition: .3s;
+        }
+        .box{
+            margin: 0 10px 0;
+        }
+        .row a:hover{
+            background-color: #eee;
+            color: #111;
+        }
+        .box.index{
+            width: 25px;
+            text-align: right;
+            padding: 0 10px 0px 0;
+        }
+        .box.shop{
+            width: 150px;
+        }
+        .box.name{
+            display: inline-block;
+            width: 700px;
+        }
+        .box.price{
+            width: 90px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="wrap">
+    <%= Time.now%>
+    <h1>Result</h1>
+    <p class="size">共 <%= @ary.size%> 筆資料</p>
+    <div class="row head">
+        <div class="box index">
+            
+        </div>
+        <div class="box shop">
+            來源
+        </div>
+        <div class="box name">
+            商品名稱
+        </div>
+        <div class="box price">
+            售價
+        </div>
+        <div class="box price">
+            原價
+        </div>
+        <div class="box price">
+            折數
+        </div>
+    </div>
+
+
+    <% @ary.sort_by{ |x| x['now_price'] }.each.with_index do |x, i |%>
+    <div class="row">
+        <a href="<%= x['url'] %>" target="_blank">
+        <div class="box index">
+            <%= i + 1 %>
+        </div>
+        <div class="box shop">
+            <%= x['from_shop'] %>
+        </div>
+        <div class="box name">
+            <%= x['item_name'] %>
+        </div>
+        <div class="box price">
+            <%= x['now_price'] %>
+        </div>
+        <div class="box price">
+            <%= x['ori_price'] %>
+        </div><div class="box price">
+            <%= if x['ori_price'] != nil
+                    "#{(x['now_price'].to_f / x['ori_price']).round(2)}"
+                end %> 
+        </div>
+        </a>
+    </div>
+    <% end %>
+
+</div>
+
+</body>
