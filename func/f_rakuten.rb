@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'json'
 require 'open-uri'
 
-def all_get_data(keyword)
+def r_get_data(keyword)
   raku_mobile_url = 'https://www.findprice.com.tw/g/'
   query_url = raku_mobile_url + keyword
 
@@ -19,7 +19,7 @@ def all_get_data(keyword)
     url = 'https://www.findprice.com.tw/' + x.css('a').attr('href').text
 
     item_list.push( 
-       {'from_shop'=>'all',
+       {'from_shop'=>'樂天市場',
         'item_name'=> item_name, 
         'now_price'=> now_price, 
         'ori_price'=> nil, 
@@ -29,13 +29,13 @@ def all_get_data(keyword)
   return item_list
 end
 
-def all_search(keyword)
+def raku_search(keyword)
   keyword = URI::encode(keyword)
   page_num = 1
   results = []
   next_page = true
   while next_page
-    result = all_get_data(keyword + '/?i=' + page_num.to_s + '&m=28847204')
+    result = r_get_data(keyword + '/?i=' + page_num.to_s + '&m=28847204')
     results += result
     if result.size == 0 or results.size > 50
         next_page = false
@@ -47,6 +47,6 @@ def all_search(keyword)
   return results
 end
 
-keyword = 'ypl'
-result = all_search(keyword)
-puts JSON.pretty_generate(result)
+# keyword = 'ypl'
+# result = all_search(keyword)
+# puts JSON.pretty_generate(result)
