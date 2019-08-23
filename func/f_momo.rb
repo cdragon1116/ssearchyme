@@ -14,7 +14,8 @@ def m_get_data(keyword)
 
   item_list = []
   pages.each do |x|
-    item_name = x.css('a.ga').text
+
+    item_name = x.css('a.ga').text if x.css('a.ga')
     now_price = x.css('span.rec-price-20').text.sub(',','').sub('$','').to_i
     url = 'https://www.findprice.com.tw/' + x.css('a').attr('href').text
 
