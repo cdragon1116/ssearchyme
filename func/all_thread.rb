@@ -12,7 +12,7 @@ def Qall_all_search(keyword)
   query_url = raku_mobile_url + keyword
 
   work_q = Queue.new
-  (1..20).each{|page| work_q << page}
+  (1..25).each{|page| work_q << page}
   item_list = {}
   workers = (0..10).map do
     Thread.new do 
