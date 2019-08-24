@@ -11,7 +11,7 @@ def raku_search(keyword)
   query_url = raku_mobile_url + keyword
   item_list = {}
 
-  threads = (1..10).map do |page|
+  threads = (1..15).map do |page|
     Thread.new(page) do |page|
       begin 
         doc = Nokogiri::HTML(open(query_url +  "/?i=#{page}" + '&m=28847204'))
