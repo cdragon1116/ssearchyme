@@ -6,6 +6,7 @@ require './models/user'
 require './config/environment.rb'
 
 require_relative './func/yahoo.rb'
+require_relative './func/f_yahoob.rb'
 require_relative './func/f_momo.rb'
 require_relative './func/f_rakuten.rb'  
 require_relative './func/f_shopee.rb'  
@@ -23,7 +24,8 @@ class App < Sinatra::Base
       @yahoo = yahoo_search(@keyword).to_a if params[:shop].has_key?("shop_y")
       @raku = raku_search(@keyword).to_a if params[:shop].has_key?("shop_r")
       @shop = shop_search(@keyword).to_a if params[:shop].has_key?("shop_s")
-      @ary = Array(@yahoo) + Array(@momo) + Array(@raku) + Array(@shop)
+      @yahoob = yahoob_search(@keyword).to_a if params[:shop].has_key?("shop_yb")
+      @ary = Array(@yahoo) + Array(@momo) + Array(@raku) + Array(@shop) + Array(@yahoob)
     end
     @ary.sort_by!{|k , v| v[:now_price]}
     erb:result

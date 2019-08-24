@@ -46,10 +46,11 @@ def Tall_search(keyword)
   raku_mobile_url = 'https://www.findprice.com.tw/g/'
   query_url = raku_mobile_url + keyword
   item_list = {}
-
-  threads = (1..30).map do |page|
-    Thread.new(page) do |page|
+  threads = (1..20).map do |page|
+    worker = Thread.new(page) do |page|
       begin 
+        before_size = item_list.size
+        puts "page -- #{page}"
         doc = Nokogiri::HTML(open(query_url +  "/?i=#{page}" + '&m=28847204%2C57%2C54%2C73%2C14%2C6%2C3%2C43455509%2C38%2C53%2C3799802'))
         page = doc.css('table.rec-tb tr')
         page.each do |item|
@@ -73,7 +74,8 @@ def Tall_search(keyword)
   return item_list
 end
 
-
+# keyword = 'asus 筆電'
+# puts Benchmark.measure{Tall_search(keyword)}
 
 # keyword = 'surface go'
 # result = Tall_search(keyword)

@@ -1,7 +1,12 @@
-<style type="text/css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ssearchy</title>
+    <style type="text/css">
     body{
             background-color: #444;
-        }
+    }
     *{
         margin: 0;
         padding: 0;
@@ -10,7 +15,10 @@
     }
     .wrap{
         text-align: center;
-        margin: 220px auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -55%);
     }
     .wrap h3{
         font-size: 40px;
@@ -61,24 +69,33 @@
         border-radius: 5px;
     }
 </style>
+</head>
 
-<div class="wrap">
-    <h3>longlong-Search</h3>
-           
-    <form action="/result" method="get">
-        <div class="shop_selection">
-            <label class="shop"><input type="checkbox" value="momo" name="shop[shop_m]" ><span>momo商城</span></label>
-            <label class="shop"><input type="checkbox" value="yahoo" name="shop[shop_y]" ><span>yahoo購物中心</span></label>
-            <label class="shop"><input type="checkbox" value="raku" name="shop[shop_r]" ><span>樂天市場</span></label>
-            <label class="shop"><input type="checkbox" value="shopee" name="shop[shop_s]" ><span>蝦皮拍賣</span></label>
-            <label class="shop"><input type="checkbox" value="all" name="shop[shop_all]" ><span>all</span></label>
-        </div>
-        <label><input type="text" name="keyword" placeholder="請輸入關鍵字" class="keyword"></label> 
+<body>
+    <div class="wrap">
+        <h3>longlong-Search</h3>
+               
+        <form action="/result" method="get">
+            <div class="shop_selection">
+                <div class="goods">
+                    <label class="shop"><input type="checkbox" value="momo" name="shop[shop_m]" ><span>momo商城</span></label>
+                    <label class="shop"><input type="checkbox" value="yahoo" name="shop[shop_y]" ><span>yahoo購物中心</span></label>
+                    <label class="shop"><input type="checkbox" value="raku" name="shop[shop_r]" ><span>樂天市場</span></label>
+                    <label class="shop"><input type="checkbox" value="all" name="shop[shop_all]" ><span>非拍賣全</span></label>
+                </div>
+                <div class="bargins">
+                    <label class="shop"><input type="checkbox" value="shopee" name="shop[shop_s]" ><span>蝦皮拍賣</span></label>
+                    <label class="shop"><input type="checkbox" value="shopee" name="shop[shop_yb]" ><span>yahoo拍賣</span></label>
+                </div>
+            </div>
+            <label><input type="text" name="keyword" placeholder="請輸入關鍵字" class="keyword"></label> 
 
 
-        <div class="row">
-            <input type="submit" name="" value="送出" class="btn"> 
-            <input type="reset" value="清空" class="btn">
-        </div>
-    </form>
-</div>
+            <div class="row">
+                <input type="submit" name="" value="送出" class="btn"> 
+                <input type="reset" value="清空" class="btn">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
