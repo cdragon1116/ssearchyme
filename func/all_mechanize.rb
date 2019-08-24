@@ -19,11 +19,11 @@ def all_get_data(keyword)
     from_shop = x.css('span img').attr('title').text
     
     item_list[item_name] = {
-      'from_shop'=> from_shop,
-      'item_name'=> item_name, 
-      'now_price'=> now_price, 
-      'ori_price'=> nil, 
-      'url'=> url}
+      :from_shop=> from_shop,
+      :item_name=> item_name, 
+      :now_price=> now_price, 
+      :ori_price=> nil, 
+      :url=> url}
   end
   return item_list
 end
@@ -37,7 +37,7 @@ def all_search(keyword)
     result = all_get_data(keyword + '/?i=' + page_num.to_s + '&m=28847204%2C57%2C54%2C73%2C14%2C6%2C3%2C43455509%2C38%2C53%2C3799802')
     before_size = results.size
     results = results.merge(result)
-    if results.size == before_size or results.size > 120
+    if results.size == before_size or results.size > 100
       next_page = false
       return results
     else

@@ -23,13 +23,12 @@ def r_get_data(keyword)
       start_ori_price = ori_price.split('-')[0].to_i
       end_ori_price = ori_price.split('-')[0].to_i
       url = 'https://www.rakuten.com.tw/' + item.css('a.product-thumbnail').attr('href').text
-
       item_list.push( 
-             {'from_shop'=>'樂天市場',
-              'item_name'=> item_name, 
-              'now_price'=> start_price, 
-              'ori_price'=> start_ori_price, 
-              'url'=> url, })
+             {:from_shop=>'樂天市場',
+              :item_name=> item_name, 
+              :now_price=> start_price, 
+              :ori_price=> start_ori_price, 
+              :url=> url, })
     end
   end
   return item_list

@@ -2,58 +2,37 @@ require 'mechanize'
 require 'nokogiri'    
 require 'json'
 require 'open-uri'
+require 'benchmark'
+require 'thread'
 
-def s_get_data(keyword)
-  raku_mobile_url = 'https://www.findprice.com.tw/b/'
-  query_url = raku_mobile_url + keyword
-
-  agent = Mechanize.new
-  html = agent.get(query_url)
-  # page.encoding = 'utf-8'
-  pages = html.css('table.rec-tb tr')
-  item_list = {}
-  pages.each do |x|
-    item_name = x.css('a.ga').text 
-    now_price = x.css('span.rec-price-20').text.sub(',','').sub('$','').to_i
-    url = 'https://www.findprice.com.tw/' + x.css('a').attr('href').text
-    
-    item_list[item_name] = {
-      'from_shop'=>'蝦皮拍賣',
-      'item_name'=> item_name, 
-      'now_price'=> now_price, 
-      'ori_price'=> nil, 
-      'url'=> url}
-  end
-  return item_list
-end
 
 def shop_search(keyword)
   keyword = URI::encode(keyword)
-  page_num = 1
-  results = {}
-  next_page = true
-  while next_page
-    result = s_get_data(keyword + '/?i=' + page_num.to_s + '&m=62')
-    before_size = results.size
-    results.merge!(result)
-    if results.size == before_size or result.size == 0 or results.size > 80
-      next_page = false
-      return results
-    else
-        page_num += 1
+  raku_mobile_url = 'https://www.findprice.com.tw/b/'
+  query_url = raku_mobile_url + keyword
+  item_list = {}
+
+  threads = (1..10).map do |page|
+    Thread.new(page) do |page|
+      begin 
+        doc = Nokogiri::HTML(open(query_url +  "/?i=#{page}" + '&m=62'))
+        page = doc.css('table.rec-tb tr')
+        page.each do |item|
+          item_name = item.css('a.ga').text
+          now_price = item.css('span.rec-price-20').text.gsub(/\D/, "").to_i
+          url = 'https://www.findprice.com.tw/' + item.css('a').attr('href').text
+          item_list[item_name] = {:from_shop=> '蝦皮拍賣',
+                                  :item_name=> item_name, 
+                                  :now_price=> now_price, 
+                                  :ori_price=> nil, 
+                                  :url=> url             }
+        end
+      rescue => e
+        puts "proglem on page #{page}"
+        puts e.inspect
+      end
     end
   end
-  return results
+  threads.map(&:join)
+  return item_list
 end
-
-# keyword = '水光針'
-# result = shop_search(keyword)
-# p result = result.sort_by{|k , v| k['now_price']}.reverse
-# result.each do |elem|
-#   p elem[1]['item_name']
-# end
-
-
-
-# puts JSON.pretty_gener
-# ate(result)

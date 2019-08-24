@@ -30,11 +30,11 @@ def momo_search(keyword)
     now_price = page.css('b.price').text.sub(',','').to_i
     url = 'http://m.momoshop.com.tw' + page.css('a').attr('href')
     now_time = Time.now
-    item_list << {'from_shop'=>'momo購物網',
-                  'item_name'=> item, 
-                  'now_price'=> now_price, 
-                  'search_time'=> "#{now_time}",
-                  'url'=> url ,
+    item_list << {:from_shop=>'momo購物網',
+                  :item_name=> item, 
+                  :now_price=> now_price, 
+                  :search_time=> "#{now_time}",
+                  :url=> url ,
                 }
   end
   return item_list

@@ -25,11 +25,11 @@ def y_get_data(keyword)
 
     now_price = price.split("$")[1].sub(',','').to_i
     item_list[item_name] = {
-      'from_shop'=>'yahoo購物中心',
-      'item_name'=> item_name, 
-      'now_price'=> now_price, 
-      'ori_price'=> ori_price, 
-      'url'=> url}
+      :from_shop=>'yahoo購物中心',
+      :item_name=> item_name, 
+      :now_price=> now_price, 
+      :ori_price=> ori_price, 
+      :url=> url}
 
   end
   return item_list

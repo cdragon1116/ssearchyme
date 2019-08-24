@@ -56,10 +56,10 @@
         }
         .box.name{
             display: inline-block;
-            width: 700px;
+            width: 800px;
         }
         .box.price{
-            width: 80px;
+            width: 55px;
         }
     </style>
 </head>
@@ -98,34 +98,25 @@
                 <%= i + 1 %>
             </div>
             <div class="box shop">
-                <%= elem[1]['from_shop']%>
+                <%= elem[1][:from_shop]%>
             </div>
             <div class="box name">
-                <%= elem[1]['item_name']%>
+                <%= elem[1][:item_name]%>
             </div>
             <div class="box price">
-                <%= elem[1]['now_price'] %>
+                <%= elem[1][:now_price] %>
             </div>
             <div class="box price">
-                <%= elem[1]['ori_price'] %>
+                <%= elem[1][:ori_price] %>
             </div><div class="box price">
-                <%= if elem[1]['ori_price'] != nil
-                        "#{(elem[1]['now_price'].to_f / elem[1]['ori_price']).round(2)}"
+                <%= if elem[1][:ori_price] != nil
+                        "#{(elem[1][:now_price].to_f / elem[1][:ori_price]).round(2)}"
                     end %> 
             </div>
             </a>
         </div>
         <% end %>
     </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" defer></script> 
-    <script type="text/javascript">
-        console.log("loaded")
-
-
-    </script>
-
 </div>
 </body>
 </html>
