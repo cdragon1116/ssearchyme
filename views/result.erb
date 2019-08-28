@@ -132,7 +132,7 @@
     $(document).ready(function() {
         $(document).on('click', '.head', function() {
             let table = $(this).parents('.table').eq(0);
-            var rows = table.find('.tbody .row:gt(0)').toArray().sort(comparer($(this).index()));
+            var rows = table.find('.tbody .row').toArray().sort(comparer($(this).index()));
             this.asc = !this.asc;
             if (!this.asc) { rows = rows.reverse(); }
             table.children('.tbody').empty().html(rows)
