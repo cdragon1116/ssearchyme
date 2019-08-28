@@ -39,8 +39,14 @@
             border-radius: 5px;
             transition: .3s;
         }
+        .head:hover{
+            background-color: #eee;
+            color: #111;
+        }
         .box{
             margin: 0 10px 0;
+            border-radius: 5px;
+            padding: 0px 5px;
         }
         .row a:hover{
             background-color: #eee;
@@ -70,9 +76,9 @@
     <h1>Result</h1>
     <p class="size">共 <%= @ary.size%> 筆資料 / 僅顯示前20頁查詢結果</p>
     <div class="table"">
-        <p>*點擊表頭以排序</p>
         <div class="row thead">
                 <div class="box head index">
+                    No
                 </div>
                 <div class="box head shop">
                     來源
@@ -126,9 +132,8 @@
     $(document).on('click','.head',function(){
         let table = $(this).parents('.table').eq(0);
         var rows = table.find('.tbody .row').toArray().sort(comparer($(this).index()));
-        this.asc = !this.asc;
         if (!this.asc){ rows = rows.reverse();}
-        table.children('.tbody').empty().html(rows)
+        table.children('.tbody').empty().html(rows);
 
     });
     function comparer(index) {
