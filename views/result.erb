@@ -69,55 +69,80 @@
     <%= Time.now%>
     <h1>Result</h1>
     <p class="size">共 <%= @ary.size%> 筆資料 / 僅顯示前20頁查詢結果</p>
-    <div class="table" id="tblSort">
-        <div class="row head">
-                <div class="box index">
+    <div class="table"">
+        <p>*點擊表頭以排序</p>
+        <div class="row thead">
+                <div class="box head index">
                 </div>
-                <div class="box shop">
+                <div class="box head shop">
                     來源
                 </div>
-                <div class="box name">
+                <div class="box head name">
                     商品名稱
                 </div>
-                <div class="box price">
+                <div class="box head price">
                     售價
                 </div>
-                <div class="box price">
+                <div class="box head price">
                     原價
                 </div>
-                <div class="box price">
+                <div class="box head price">
                     折數
                 </div>
         </div>
 
-
-        <% @ary.each.with_index do |elem, i|%>
-        <div class="row">
-            <a href="<%= elem[1][:url] %>" target="_blank">
-            <div class="box index">
-                <%= i + 1 %>
+        <div class="tbody">
+            <% @ary.each.with_index do |elem, i|%>
+            <div class="row">
+                <a href="<%= elem[1][:url] %>" target="_blank">
+                <div class="box index">
+                    <%= i + 1 %>
+                </div>
+                <div class="box shop">
+                    <%= elem[1][:from_shop]%>
+                </div>
+                <div class="box name">
+                    <%= elem[1][:item_name]%>
+                </div>
+                <div class="box price">
+                    <%= elem[1][:now_price] %>
+                </div>
+                <div class="box price">
+                    <%= elem[1][:ori_price] %>
+                </div><div class="box price">
+                    <%= if elem[1][:ori_price] != nil
+                            "#{(elem[1][:now_price].to_f / elem[1][:ori_price]).round(2)}"
+                        end %> 
+                </div>
+                </a>
             </div>
-            <div class="box shop">
-                <%= elem[1][:from_shop]%>
-            </div>
-            <div class="box name">
-                <%= elem[1][:item_name]%>
-            </div>
-            <div class="box price">
-                <%= elem[1][:now_price] %>
-            </div>
-            <div class="box price">
-                <%= elem[1][:ori_price] %>
-            </div><div class="box price">
-                <%= if elem[1][:ori_price] != nil
-                        "#{(elem[1][:now_price].to_f / elem[1][:ori_price]).round(2)}"
-                    end %> 
-            </div>
-            </a>
+            <% end %>
         </div>
-        <% end %>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $(document).on('click','.head',function(){
+        let table = $(this).parents('.table').eq(0);
+        var rows = table.find('.tbody .row').toArray().sort(comparer($(this).index()));
+        this.asc = !this.asc;
+        if (!this.asc){ rows = rows.reverse();}
+        table.children('.tbody').empty().html(rows)
+
+    });
+    function comparer(index) {
+    return function(a, b) {
+        var valA = getCellValue(a, index), valB = getCellValue(b, index);
+        return $.isNumeric(valA) && $.isNumeric(valB) ?
+            valA - valB : valA.localeCompare(valB);
+    };
+    }
+    function getCellValue(row, index){
+        return $(row).children('.box').eq(index).text();
+    }
+})
+</script>
 </body>
 </html>
 
