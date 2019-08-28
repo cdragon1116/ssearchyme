@@ -141,14 +141,11 @@
             return function(a, b) {
                 var valA = getCellValue(a, index),
                     valB = getCellValue(b, index);
-                    console.log(valA)
-                    return valA.localeCompare(valB)
-                // return $.isNumeric(valA) && $.isNumeric(valB) ?
-                //     valA - valB : valA.localeCompare(valB);
+                return $.isNumeric(valA) && $.isNumeric(valB) ?
+                    valA - valB : valA.localeCompare(valB);
             };
         }
         function getCellValue(row, index) {
-            console.log($(row).find(`.box:eq(${index})`).text());
             return $(row).find(`.box:eq(${index})`).text()
         }
     })
