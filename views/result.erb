@@ -115,7 +115,8 @@
                 </div>
                 <div class="box price">
                     <%= elem[1][:ori_price] %>
-                </div><div class="box price">
+                </div>
+                <div class="box price">
                     <%= if elem[1][:ori_price] != nil
                             "#{(elem[1][:now_price].to_f / elem[1][:ori_price]).round(2)}"
                         end %> 
@@ -127,27 +128,31 @@
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-    $(document).on('click','.head',function(){
-        let table = $(this).parents('.table').eq(0);
-        var rows = table.find('.tbody .row').toArray().sort(comparer($(this).index()));
-        if (!this.asc){ rows = rows.reverse();}
-        table.children('.tbody').empty().html(rows);
-
-    });
-    function comparer(index) {
-    return function(a, b) {
-        var valA = getCellValue(a, index), valB = getCellValue(b, index);
-        return $.isNumeric(valA) && $.isNumeric(valB) ?
-            valA - valB : valA.localeCompare(valB);
-    };
-    }
-    function getCellValue(row, index){
-        return $(row).children('.box').eq(index).text();
-    }
-})
-</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '.head', function() {
+            let table = $(this).parents('.table').eq(0);
+            var rows = table.find('.tbody .row:gt(0)').toArray().sort(comparer($(this).index()));
+            this.asc = !this.asc;
+            if (!this.asc) { rows = rows.reverse(); }
+            table.children('.tbody').empty().html(rows)
+        });
+        function comparer(index) {
+            return function(a, b) {
+                var valA = getCellValue(a, index),
+                    valB = getCellValue(b, index);
+                    console.log(valA)
+                    return valA.localeCompare(valB)
+                // return $.isNumeric(valA) && $.isNumeric(valB) ?
+                //     valA - valB : valA.localeCompare(valB);
+            };
+        }
+        function getCellValue(row, index) {
+            console.log($(row).find(`.box:eq(${index})`).text());
+            return $(row).find(`.box:eq(${index})`).text()
+        }
+    })
+    </script>
 </body>
 </html>
 
