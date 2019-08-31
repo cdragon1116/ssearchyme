@@ -19,7 +19,6 @@ def Qall_all_search(keyword)
       begin
         while page = work_q.pop(true)
           begin
-            # puts "page - #{page}"
             doc = Nokogiri::HTML(open(query_url +  "/?i=#{page}"))
             page = doc.css('table.rec-tb tr')
             page.each do |item|

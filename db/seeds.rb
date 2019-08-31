@@ -1,6 +1,7 @@
-# db/seeds.rb
-require_relative '../models/user.rb'
+Dir.glob('./app/{models}/*.rb').each { |file| require file }
 
+
+# require_relative '../models/user.rb'
 
 users = [
   {name: 'Jon',email: 'e@example.com'},

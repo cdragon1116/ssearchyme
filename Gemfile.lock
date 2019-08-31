@@ -19,6 +19,10 @@ GEM
     connection_pool (2.2.2)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (1.6.0)
@@ -88,6 +92,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
+    unicode-display_width (0.1.1)
     webrobots (0.1.2)
 
 PLATFORMS
@@ -95,6 +100,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (= 5.2)
+  hirb-unicode (~> 0.0.5)
   json
   mechanize
   nokogiri
