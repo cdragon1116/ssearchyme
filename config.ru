@@ -1,4 +1,4 @@
-require 'sinatra'
-require './app.rb'
+require 'sinatra/base'
+Dir.glob('./app/{helpers,controllers}/*.rb').each { |file| require file }
 
-run App
+map('/') { run ApplicationController }
