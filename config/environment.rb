@@ -10,5 +10,9 @@ end
 
 
 configure :development do
-  set :database, 'sqlite3:db/database.db'
+    set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'RubyWC_production', pool: 2, username: 'longlong', password: 'a5879632'}
+end
+
+configure :production do
+  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'RubyWC_production', pool: 2, username: 'longlong', password: 'a5879632'}
 end

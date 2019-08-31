@@ -7,11 +7,10 @@ gem 'nokogiri'
 gem 'activerecord', '5.2'
 gem 'sinatra-activerecord'
 gem 'rake'
-
-
+gem 'pg'
 
 group :development do
   gem 'tux'
-  gem 'sqlite3', '~> 1.3.6'
   gem 'json'
 end
+

@@ -5,12 +5,12 @@ require "sinatra/activerecord"
 require './models/user'
 require './config/environment.rb'
 
-require_relative './func/yahoo.rb'
-require_relative './func/f_yahoob.rb'
-require_relative './func/f_momo.rb'
-require_relative './func/f_rakuten.rb'  
-require_relative './func/f_shopee.rb'  
-require_relative './func/all_thread.rb'  
+require_relative './helper/yahoo.rb'
+require_relative './helper/f_yahoob.rb'
+require_relative './helper/f_momo.rb'
+require_relative './helper/f_rakuten.rb'  
+require_relative './helper/f_shopee.rb'  
+require_relative './helper/all_thread.rb'  
 
 
 class App < Sinatra::Base

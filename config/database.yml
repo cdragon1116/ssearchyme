@@ -1,0 +1,14 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: RubyWC_development
+  pool: 2
+  username: longlong
+  password: a5879632
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: RubyWC_production
+  pool: 2
+  username: longlong
+  password: a5879632
