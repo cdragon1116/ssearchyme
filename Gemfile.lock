@@ -46,10 +46,13 @@ GEM
     net-http-digest_auth (1.4.1)
     net-http-persistent (3.1.0)
       connection_pool (~> 2.2)
+    nio4r (2.5.1)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
     pg (1.1.4)
+    puma (4.1.0)
+      nio4r (~> 2.0)
     rack (1.6.11)
     rack-protection (1.5.5)
       rack
@@ -105,11 +108,16 @@ DEPENDENCIES
   mechanize
   nokogiri
   pg
+  puma
   rake
   sinatra (~> 1.4, >= 1.4.7)
   sinatra-activerecord
+  sinatra-contrib
   sinatra-reloader
   tux
+
+RUBY VERSION
+   ruby 2.6.3p62
 
 BUNDLED WITH
    1.17.3
